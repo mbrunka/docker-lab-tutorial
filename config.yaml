@@ -1,38 +1,22 @@
 sections:
- - name: "Filmy i seriale"
-   icon: "films.jpg"
-   links:
-     - name: "Netflix (Filmy)"
-       href: "https://www.netflix.com/"
-       icon: "netflix.png"
-     - name: "Youtube"
-       href: "https://www.youtube.com/"
-       icon: "youtube.png"
-
- - name: "Banki"
-   icon: "bank.png"
-   links:
-     - name: "PKO"
-       href: "https://www.pkobp.pl"
-       icon: "bank.png"
-     - name: "Millenium"
-       href: "https://www.bankmillennium.pl"
-       icon: "bank.png"
-
- - name: "Social Media"
-   icon: "social.png"
-   links:
-     - name: "Facebook"
-       href: "https://www.facebook.com"
-       icon: "facebook.png"
-     - name: "X (Twitter)"
-       href: "https://www.twitter.com"
-       icon: "social.png"
-
+  - name: Apple
+    icon: apple.svg
+    links:
+      - name: Apple TV+
+        href: 'https://www.apple.com/apple-tv-plus/'
+        icon: appletv.svg
+      - name: Apple Music
+        href: 'https://www.apple.com/apple-music/'
+        icon: applemusic.svg
+  - name: Social Media
+    icon: social.png
+    links:
+      - name: Facebook
+        href: 'https://www.facebook.com'
+        icon: facebook.svg
 search:
- placeholder: "Search the web..."
- name: "Google"
- url: "https://www.google.com/search"
-
+  placeholder: Search the web...
+  name: Google
+  url: 'https://www.google.com/search'
 fallbackIcon:
-  name: search.jpg
+  name: deutschebank.svg
