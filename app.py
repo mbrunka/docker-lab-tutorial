@@ -1,8 +1,17 @@
 import os
-from flask import Flask, render_template
+from flask import Flask, render_template, jsonify
 import yaml
 
 app = Flask(__name__)
+
+# Liveness check: check if the application is alive
+@app.route('/live')
+def liveness():
+    response = {
+        "status": "alive",
+        "message": "The application is running!"
+    }
+    return jsonify(response), 200
 
 # Load the YAML config file
 with open('config.yaml', 'r') as file:
