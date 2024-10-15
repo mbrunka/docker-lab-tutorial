@@ -1,35 +1,80 @@
 import os
 from flask import Flask, render_template
-import yaml
 
 app = Flask(__name__)
 
-# Load the YAML config file
-with open('config.yaml', 'r') as file:
-   config = yaml.safe_load(file)
+# Definicja konfiguracji w słowniku
+config = {
+    "sections": [
+        {
+            "name": "Apple",
+            "icon": "apple.svg",
+            "links": [
+                {
+                    "name": "Apple TV+",
+                    "href": "https://www.apple.com/apple-tv-plus/",
+                    "icon": "appletv.svg",
+                },
+                {
+                    "name": "Apple Music",
+                    "href": "https://www.apple.com/apple-music/",
+                    "icon": "applemusic.svg",
+                },
+            ],
+        },
+        {
+            "name": "Social Media",
+            "icon": "social.png",
+            "links": [
+                {
+                    "name": "Facebook",
+                    "href": "https://www.facebook.com",
+                    "icon": "facebook.svg",
+                }
+            ],
+        },
+    ],
+    "search": {
+        "placeholder": "Search the web...",
+        "name": "Google",
+        "url": "https://www.google.com/search",
+    },
+    "fallbackIcon": {"name": "deutschebank.svg"},
+}
 
-# Function to check if a file exists in the static folder
+
+# Funkcja sprawdzająca czy plik ikony istnieje w folderze static
 def icon_exists(icon_name):
-   return os.path.exists(os.path.join(app.static_folder, "icons", icon_name))
+    return os.path.exists(os.path.join(app.static_folder, "icons", icon_name))
 
-@app.route('/')
+
+@app.route("/")
 def index():
-   sections = config.get('sections', [])
-   fallback_icon = config['fallbackIcon']['name']
+    sections = config.get("sections", [])
+    fallback_icon = config["fallbackIcon"]["name"]
 
-   # Check icons for sections and links
-   for section in sections:
-       section_icon = section.get('icon', '').strip()  # Get section icon and remove whitespace
-       if not section_icon or not icon_exists(section_icon):
-           section['icon'] = fallback_icon  # Use fallback if icon is missing or empty
+    # Sprawdzanie ikon dla sekcji i linków
+    for section in sections:
+        section_icon = section.get(
+            "icon", ""
+        ).strip()  # Pobieranie ikony sekcji i usuwanie białych znaków
+        if not section_icon or not icon_exists(section_icon):
+            section["icon"] = (
+                fallback_icon  # Użyj ikony zastępczej, jeśli ikona jest pusta lub nie istnieje
+            )
 
-       for link in section.get('links', []):
-           link_icon = link.get('icon', '').strip()  # Get link icon and remove whitespace
-           if not link_icon or not icon_exists(link_icon):
-               link['icon'] = fallback_icon  # Use fallback if icon is missing or empty
+        for link in section.get("links", []):
+            link_icon = link.get(
+                "icon", ""
+            ).strip()  # Pobieranie ikony linku i usuwanie białych znaków
+            if not link_icon or not icon_exists(link_icon):
+                link["icon"] = (
+                    fallback_icon  # Użyj ikony zastępczej, jeśli ikona jest pusta lub nie istnieje
+                )
 
-   search = config.get('search', {})
-   return render_template('index.html', sections=sections, search=search)
+    search = config.get("search", {})
+    return render_template("index.html", sections=sections, search=search)
 
-if __name__ == '__main__':
-   app.run(debug=True)
+
+if __name__ == "__main__":
+    app.run(debug=True)
