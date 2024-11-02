@@ -53,7 +53,7 @@ body {
     flex-direction: column;
     align-items: center;
  }
- 
+
  /* Each link (small tile inside the section) */
  .link-tile {
     background-color: #444;
@@ -84,6 +84,9 @@ body {
     flex-grow: 1;
     font-size: 1.1em;
     text-align: left;
+    font-family: 'Arial', sans-serif;
+    color: #f0f0f0;
+    text-decoration: none;
  }
  
  /* Search bar */

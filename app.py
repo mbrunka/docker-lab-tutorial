@@ -31,7 +31,7 @@ config = {
                     "health-check": "http://192.168.0.31:5001/live"
                 },
                 {
-                    "name": "PiHole",
+                    "name": "Pihole",
                     "href": "http://192.168.0.31/admin",
                     "icon": "pihole.svg",
                     "health-check": "http://192.168.0.31/admin/api.php?status&auth=756bc47cb5215dc3329ca7e1f7be33a2dad68990bb94b76d90aa07f4e44a233a"

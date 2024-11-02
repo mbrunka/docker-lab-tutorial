@@ -21,10 +21,10 @@
             <h2>{{ section.name }}</h2>
             <div class="links-container">
                 {% for link in section.links %}
-                <a href="{{ link.href }}" >
+                <!-- <a href="{{ link.href }}" > -->
                 <div class="link-tile">
                     <img src="{{ url_for('static', filename='icons/' + link.icon) }}" alt="Icon">
-                    <div class="link-text">{{ link.name }}</div>
+                    <a class="link-text" href="{{ link.href }}">{{ link.name }}</a>
                         {% if 'health-check' in link %}
                         <span class="health-dot" style="background-color: {{ 'lime' if link.health else 'red' }}; 
                         width: 10px; 
@@ -33,7 +33,7 @@
                         margin-right: 5px;"></span>
                         {% endif %}
                 </div>
-                </a>
+                <!-- </a> -->
                 {% endfor %}
             </div>
         </div>
