@@ -18,3 +18,7 @@ RUN git clone --depth=1 https://github.com/simple-icons/simple-icons.git /tmp/si
 RUN mkdir -p /app/static/icons && cp -r /tmp/simple-icons/icons/* /app/static/icons/
 
 CMD ["python", "-m", "flask", "run", "--host=0.0.0.0"]
+
+# Health check dla Docker
+HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
+  CMD curl -f http://localhost:5000/live || exit 1

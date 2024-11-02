@@ -24,11 +24,38 @@
                 <div class="link-tile">
                     <img src="{{ url_for('static', filename='icons/' + link.icon) }}" alt="Icon">
                     <div class="link-text">{{ link.name }}</div>
+                    <span class="health-dot" id="health-dot-{{ loop.index0 }}-{{ section.name|replace(' ', '-') }}"></span> <!-- Unikalne ID dla kropki -->
                 </div>
                 {% endfor %}
             </div>
         </div>
         {% endfor %}
     </div>
+
+    <script>
+        async function checkHealth() {
+            try {
+                const response = await fetch('/live');
+                const healthDots = document.querySelectorAll('.health-dot'); // Wybierz wszystkie kropki
+                healthsDots.forEach((dot, index) => {
+                    if (response.ok) {
+                        // Zmiana koloru kropki na zielony, jeśli strona działa
+                        dot.style.backgroundColor = 'lime';
+                    } else {
+                        // Ustaw kolor na czerwony, jeśli odpowiedź nie jest ok
+                        dot.style.backgroundColor = 'red';
+                    }
+                });
+            } catch (error) {
+                console.error('Błąd podczas sprawdzania stanu:', error);
+                // Ustaw kolor na żółty w przypadku błędu
+                document.querySelectorAll('.health-dot').forEach(dot => dot.style.backgroundColor = 'yellow');
+            }
+        }
+
+        // Wywołaj funkcję health check przy załadowaniu strony
+        window.onload = checkHealth;
+    </script>
+
 </body>
 </html>
