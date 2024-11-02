@@ -85,16 +85,6 @@ body {
     font-size: 1.1em;
     text-align: left;
  }
-
- .health-dot {
-   display: inline-block;
-   width: 10px;
-   height: 10px;
-   background-color: red;
-   border-radius: 50%;
-   margin-right: 5px;
-   vertical-align: middle;
-}
  
  /* Search bar */
  .search-bar {
