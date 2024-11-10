@@ -3,49 +3,13 @@ import threading
 import time
 from flask import Flask, render_template, jsonify
 import requests
+import yaml
 
 app = Flask(__name__)
 
-# Definicja konfiguracji w słowniku
-config = {
-    "sections": [
-        {
-            "name": "Apple",
-            "icon": "apple.svg",
-            "links": [
-                {
-                    "name": "ApplePay",
-                    "href": "https://www.apple.com/pl/apple-pay/",
-                    "icon": "applepay.svg",
-                },
-            ],
-        },
-        {
-            "name": "My services",
-            "icon": "social.png",
-            "links": [
-                {
-                    "name": "Second Home Page",
-                    "href": "http://192.168.0.31:5001",
-                    "icon": "facebook.svg",
-                    "health-check": "http://192.168.0.31:5001/live"
-                },
-                {
-                    "name": "Pihole",
-                    "href": "http://192.168.0.31/admin",
-                    "icon": "pihole.svg",
-                    "health-check": "http://192.168.0.31/admin/api.php?status&auth=756bc47cb5215dc3329ca7e1f7be33a2dad68990bb94b76d90aa07f4e44a233a"
-                },
-            ],
-        },
-    ],
-    "search": {
-        "placeholder": "Search the web...",
-        "name": "Google",
-        "url": "https://www.google.com/search",
-    },
-    "fallbackIcon": {"name": "deutschebank.svg"},
-}
+# Load the YAML config file
+with open('config.yaml', 'r') as file:
+   config = yaml.safe_load(file)
 
 # Liveness check: check if the application is alive
 @app.route('/live')

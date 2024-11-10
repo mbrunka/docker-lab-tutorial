@@ -1,0 +1,22 @@
+version: "3"
+services:
+  homepage:
+    container_name: homepage
+    image: brunek/docker-lab-tutorial:latest
+    ports:
+      - "80:5000"
+    volumes:
+      - ./homepage_config.yaml:/config.yaml
+      - ../dashboard-icons/png:/static/icons/png
+      - ../dashboard-icons/svg:/static/icons/svg
+    restart: unless-stopped
+  adminpage:
+    container_name: adminpage
+    image: brunek/docker-lab-tutorial:latest
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./adminpage_config.yaml:/config.yaml
+      - ../dashboard-icons/png:/static/icons/png
+      - ../dashboard-icons/svg:/static/icons/svg
+    restart: unless-stopped
