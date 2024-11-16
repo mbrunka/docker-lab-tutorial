@@ -21,7 +21,6 @@
             <h2>{{ section.name }}</h2>
             <div class="links-container">
                 {% for link in section.links %}
-                <!-- <a href="{{ link.href }}" > -->
                 <div class="link-tile">
                     <img src="{{ url_for('static', filename='icons/' + link.icon) }}" alt="Icon">
                     <a class="link-text" href="{{ link.href }}">{{ link.name }}</a>
@@ -33,7 +32,6 @@
                         margin-right: 5px;"></span>
                         {% endif %}
                 </div>
-                <!-- </a> -->
                 {% endfor %}
             </div>
         </div>
