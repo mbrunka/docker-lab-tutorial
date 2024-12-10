@@ -1,0 +1,43 @@
+version: '3'
+networks:
+  compose_db_net: # Definicja niestandardowej sieci
+    driver: bridge
+services:
+  my-app:
+    build: .
+    develop:
+      watch:
+        - action: sync
+          path: ./app
+          target: /home/app
+    ports:
+    - 3000:3000
+    networks:
+      - compose_db_net
+  mongodb:
+    image: mongo
+    ports:
+      - 27017:27017
+    networks:
+      - compose_db_net
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=password
+    volumes:
+      - mongo-data:/data/db
+  mongo-express:
+    image: mongo-express
+    restart: always # fixes MongoNetworkError when mongodb is not ready when mongo-express starts
+    ports:
+      - 8081:8081
+    networks:
+      - compose_db_net
+    environment:
+      - ME_CONFIG_MONGODB_URL=mongodb://admin:password@mongodb:27017/
+      - ME_CONFIG_MONGODB_ADMINUSERNAME=admin
+      - ME_CONFIG_MONGODB_ADMINPASSWORD=password
+      - ME_CONFIG_BASICAUTH_USERNAME=admin
+      - ME_CONFIG_BASICAUTH_PASSWORD=password
+volumes:
+  mongo-data:
+    driver: local

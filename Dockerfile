@@ -1,20 +1,18 @@
-FROM python:3.14.0a1-alpine3.20
+FROM node:13-alpine
 
-# Instalacja git i innych zależności
-RUN apk add --no-cache git
+ENV MONGO_DB_USERNAME=admin \
+    MONGO_DB_PWD=password
 
-RUN python -m ensurepip
-RUN pip install --no-cache-dir flask PyYAML flask-healthz requests
+RUN mkdir -p /home/app
 
-WORKDIR /app
+COPY ./app /home/app
 
-# Kopiowanie zawartości aplikacji
-COPY . .
+# set default dir so that next commands executes in /home/app dir
+WORKDIR /home/app
 
-# Klonowanie repozytorium simple-icons do tymczasowego folderu
-RUN git clone --depth=1 https://github.com/simple-icons/simple-icons.git /tmp/simple-icons
+# will execute npm install in /home/app because of WORKDIR
+RUN npm install
 
-# Skopiowanie tylko zawartości folderu /icons do /app/static/icons
-RUN mkdir -p /app/static/icons && cp -r /tmp/simple-icons/icons/* /app/static/icons/
+# no need for /home/app/server.js because of WORKDIR
+CMD ["node", "server.js"]
 
-CMD ["python", "-m", "flask", "run", "--host=0.0.0.0"]

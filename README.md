@@ -1,1 +1,1 @@
-# docker-lab-tutorial
+Code of node aplication writen by: Nana Janashia
