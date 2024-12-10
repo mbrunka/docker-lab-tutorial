@@ -1,0 +1,24 @@
+sections:
+    - name: Moje Serwisy
+      icon: svg/docker.svg
+      links:
+          - name: Homepage 80
+            href: http://127.0.0.1:8080
+            icon: svg/diagrams-net.svg
+            health-check: http://192.168.0.31:8080
+
+          - name: "Pihole"
+            href: "http://192.168.0.31/admin"
+            icon: svg/pi-hole.svg
+            health-check: "http://192.168.0.31/admin/api.php?status&auth=756bc47cb5215dc3329ca7e1f7be33a2dad68990bb94b76d90aa07f4e44a233a"
+
+          - name: "Yacht"
+            href: http://127.0.0.1:8000
+            icon: png/yacht-light.png
+            health-check: http://192.168.0.31:8000
+search:
+    placeholder: Search the web...
+    name: Google
+    url: https://www.google.com/search
+fallbackIcon:
+    name: svg/xwiki.svg

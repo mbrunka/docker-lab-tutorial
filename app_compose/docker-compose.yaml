@@ -1,0 +1,21 @@
+version: "3"
+services:
+  homepage:
+    container_name: homepage
+    image: kacszat/chmur_obli_lab5:0.2.2
+    ports:
+      - "8080:5000"
+    volumes:
+      - ./homepage_config.yaml:/config.yaml
+      - ../../dashboard-icons/png:/static/icons/png
+      - ../../dashboard-icons/svg:/static/icons/svg
+  adminpage:
+    container_name: adminpage
+    image: kacszat/chmur_obli_lab5:0.2.2
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./adminpage_config.yaml:/config.yaml
+      - ../../dashboard-icons/png:/static/icons/png
+      - ../../dashboard-icons/svg:/static/icons/svg
+    restart: unless-stopped

@@ -1,0 +1,13 @@
+sections:
+    - name: Skróty
+      icon: svg/linkace.svg
+      links:
+          - name: DuckDuckGo
+            href: https://www.duckduckgo.com/
+            icon: svg/duckduckgo.svg
+search:
+    placeholder: Search the web...
+    name: Google
+    url: https://www.google.com/search
+fallbackIcon:
+    name: svg/xwiki.svg

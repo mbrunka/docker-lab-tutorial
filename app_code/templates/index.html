@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Strona Główna</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="search-bar">
+        <form action="https://www.google.com/search" method="get" target="_blank">
+            <input type="text" name="q" placeholder="{{ search.placeholder }}" required>
+            <button type="submit">{{ search.name }}</button>
+        </form>
+    </div>
+
+    <div class="container">
+        {% for section in sections %}
+        <div class="section">
+            <img src="{{ url_for('static', filename='icons/' + section.icon) }}" class="section-icon" alt="Icon">
+            <h2>{{ section.name }}</h2>
+            <div class="links-container">
+                {% for link in section.links %}
+                <div class="link-tile">
+                    <img src="{{ url_for('static', filename='icons/' + link.icon) }}" alt="Icon">
+                    <a class="link-text" href="{{ link.href }}">{{ link.name }}</a>
+                        {% if 'health-check' in link %}
+                        <span class="health-dot" style="background-color: {{ 'lime' if link.health else 'red' }}; 
+                        width: 10px; 
+                        height: 10px; 
+                        border-radius: 50%; 
+                        margin-right: 5px;"></span>
+                        {% endif %}
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
+
